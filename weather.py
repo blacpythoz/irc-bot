@@ -2,7 +2,7 @@ from urllib.request import urlopen
 import json
 
 def get_weather(location):
-    api_key = "??????????"
+    api_key = "85a4e3c55b73909f42c6a23ec35b7147"
     units = "metric"
 
     try:
