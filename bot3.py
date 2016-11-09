@@ -16,6 +16,7 @@ realname = "VioleDpanday"
 modes = "2 3"
 channelname = "##linuxnepal"
 encoding = "UTF-8"
+admin = "blacpythoz"
 
 # Sockets  connection
 irc_sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -48,11 +49,15 @@ def bot_reply(message,user):
         irc_send_priv(date)
 
     if msg[0] == "!weather":
-        if msg[1] != None:
+        if msg[-1] != msg[0]:
             condition = weather.get_weather(msg[1])
-            irc_send_priv(condition)
+            irc_send_priv("{} {}".format(user,condition))
         else:
             irc_send_priv("{} Enter the city as :weather Kathmandu".format(user))
+
+    # Exit the bots
+    if user == admin and message == "kill bot":
+        irc_send("QUIT")
 
 while True:
     ## Receive the server output decode it and strip out the carriage return and newline
@@ -69,7 +74,7 @@ while True:
         irc_send("PRIVMSG {} :HELLO {}".format(channelname, other_user))
 
     if buffer_msg.find("PRIVMSG {}".format(channelname)) != -1:
-        other_user = buffer_msg.split('!')[0]
+        other_user = buffer_msg.split('!')[0][1:]
         message = buffer_msg.split('PRIVMSG',1)[1].split(':',1)[1]
         bot_reply(message,other_user)
 

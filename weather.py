@@ -12,11 +12,11 @@ def get_weather(location):
         print("Cannot load data")
         return None
     parsed_json = json.loads(json_string)
-    text = "Weather of "+location+" is: "+parsed_json['weather'][0]['description']+ " with " + str(parsed_json['main']['temp'])+" *C "
+    text = "Weather of "+parsed_json['name']+" is: "+parsed_json['weather'][0]['description']+ " with " + str(parsed_json['main']['temp'])+" *C and humidity is "+str(parsed_json['main']['humidity'])
     return text
 
-#    for keys in parsed_json:
-#        print(keys," -> ", parsed_json[keys])
+    #for keys in parsed_json:
+        #print(keys," -> ", parsed_json[keys])
 
 #get_weather("Chitwan")
 
