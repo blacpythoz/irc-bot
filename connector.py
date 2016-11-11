@@ -5,6 +5,10 @@ import socket
 import ssl
 import os
 import json
+import locale
+
+# Get system default encodings
+encoding = locale.getpreferredencoding()
 
 myfile='bot.config'
 #config_files =os.path.join(os.getcwd(),myfile) 
@@ -32,9 +36,8 @@ def create_config_file():
     else:
         print("Files exists")
 
-
 class Connection():
-    
+
     setting = False
     sock = ""
 
