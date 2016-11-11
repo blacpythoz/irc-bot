@@ -44,7 +44,7 @@ def bot_reply(message,user):
     msg = message.split(' ')
     print(message)
     if msg[0] == "!fuck":
-        irc_send_priv("You ass holes")
+        irc_send_priv("You ass hole, Mother fucker")
 
     if msg[0] == "!date":
         date = nepali_date.get_nepali_date()
