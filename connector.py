@@ -33,7 +33,7 @@ def create_config_file():
         print("Files exists")
 
 
-class Irc():
+class Connection():
     
     setting = False
     sock = ""
@@ -93,5 +93,5 @@ class Irc():
 
 # For testing connections
 if __name__ == "__main__":
-    k = Irc()
+    k = Connection()
     k.main()
