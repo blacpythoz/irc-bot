@@ -1,5 +1,8 @@
-from urllib.request import urlopen
+#! /usr/bin/env python3
+# -*- coding: utf8 -*-
+
 import json
+from urllib.request import urlopen
 
 def get_weather(location):
     api_key = "85a4e3c55b73909f42c6a23ec35b7147"

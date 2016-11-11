@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+# -*- coding: utf8 -*-
 # To do
 # Factorize code with classes and threds
 import socket
@@ -10,9 +12,9 @@ import nepali_date
 # Values
 host = 'irc.freenode.net'
 port = 6697
-nick = "deadlyVirus"
-username = "dengy23hell"
-realname = "VioleDpanday"
+nick = "deadlyBot"
+username = "[Mr.Bot]"
+realname = "bot_d_panday"
 modes = "2 3"
 channelname = "##linuxnepal"
 encoding = "UTF-8"
