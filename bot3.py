@@ -2,16 +2,16 @@
 # -*- coding: utf8 -*-
 # To do
 # Factorize code with classes and threds
+from connector import Irc
 import locale
 import weather
 import nepali_date
 import os
-import irc
 
 # Get system default encodings
 encoding = locale.getpreferredencoding()
 
-botObj = irc.Irc()
+botObj = Irc()
 botObj.main()
 
 def bot_reply(message,user):
@@ -44,7 +44,6 @@ def bot_reply(message,user):
 
 
 while True:
-    ## Receive the server output decode it and strip out the carriage return and newline
     buffer_msg= botObj.irc_buffer_msg()
 
     # Respond ping message
