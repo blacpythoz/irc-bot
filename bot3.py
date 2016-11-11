@@ -12,8 +12,8 @@ import nepali_date
 # Values
 host = 'irc.freenode.net'
 port = 6697
-nick = "deadlyBot"
-username = "[Mr.Bot]"
+nick = "Nepali_Babu"
+username = "xxxxx123"
 realname = "bot_d_panday"
 modes = "2 3"
 channelname = "##linuxnepal"
@@ -57,9 +57,17 @@ def bot_reply(message,user):
         else:
             irc_send_priv("{} Enter the city as :weather Kathmandu".format(user))
 
+    # Change bot name through admin
+    if user == admin and msg[0] == "!botnick":
+        if msg[-1] != msg[0]:
+            irc_send("NICK {}".format(msg[1]))
+        else:
+            irc_send_priv("Enter name of bot properly")
+
     # Exit the bots
     if user == admin and message == "kill bot":
         irc_send("QUIT")
+
 
 while True:
     ## Receive the server output decode it and strip out the carriage return and newline
