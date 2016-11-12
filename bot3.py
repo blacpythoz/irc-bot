@@ -17,18 +17,24 @@ class Bot():
     #local user to whom bot sents the message
     luser=""
 
-    def bot_reply(self,message,user):
+    # Message when user type !fuck
+    fuckMessage = "You ass hole, Mother Fucker"
+
+    def bot_reply(self,message):
         msg = message.split(' ')
         print(message)
         # the message starts with ! marks then it is command
         if msg[0][0] == "!":
+            # Just for fun
             if msg[0] == "!fuck":
-                self.sendMsg("You ass hole, Mother fucker")
+                self.sendMsg(self.fuckMessage)
 
+            # Provides the date 
             elif msg[0] == "!date":
                 date = nepali_date.get_nepali_date()
                 self.sendMsg(date)
 
+            # Sends the weather info to user
             elif msg[0] == "!weather":
                 if len(msg) == 2:
                     condition = weather.get_weather(msg[1])
@@ -37,14 +43,22 @@ class Bot():
                     self.sendMsg("Enter the city as  !weather Kathmandu")
 
             # Change bot name through admin
-            elif user == self.bot.getadmin() and msg[0] == "!botnick":
-                if msg[-1] != msg[0]:
+            elif self.luser == self.bot.getadmin() and msg[0] == "!botnick":
+                if len(msg) == 2:
                     self.bot.irc_send("NICK {}".format(msg[1]))
                 else:
-                    self.sendMsg("{}Enter name of bot properly")
+                    self.sendMsg("Enter name of bot properly")
 
+            # Change fuck message
+            elif self.luser == self.bot.getadmin() and msg[0] == "!fuckmsg":
+                if len(msg) == 2:
+                    self.fuckMessage = msg[1]
+                else:
+                    self.sendMsg("Enter the message as !fuckmsg [MESSAGE]")
+
+            # Provides help to the user
             elif msg[0] == "!help":
-                self.sendMsg(" Currently available commads are !date, !weather [location], !fuck")
+                self.sendMsg(" Currently available commads are !date, !weather [location], !fuck  [Admin Only] : !fuckmsg [MSG] !botnick [NAME]  kill bot")
 
             # Exit the bots
             elif user == self.bot.getadmin() and message == "kill bot":
@@ -62,7 +76,7 @@ class Bot():
         if msg.find("PRIVMSG {}".format(self.bot.getchannel())) != -1:
             user = self.getusername(msg)
             message = msg.split('PRIVMSG',1)[1].split(':',1)[1]
-            self.bot_reply(message,user)
+            self.bot_reply(message)
 
     # This functions returns the username 
     def getusername(self,msg):
