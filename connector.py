@@ -60,10 +60,12 @@ class Connection():
         print("MAde ssl connection")
         return ssl.wrap_socket(connect,ciphers=None)
 
+    # Send raw message to server
     def irc_send(self,msg):
         msg=msg+"\r\n"
         self.sock.send(bytes(msg,self.setting["encoding"]))
 
+    # Send private message to cahnnel
     def irc_send_priv(self,msg):
         msg = msg+"\r\n"
         self.sock.send(bytes("PRIVMSG {} :{}".format(self.setting["channelname"],msg), self.setting["encoding"]))
