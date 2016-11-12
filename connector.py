@@ -19,10 +19,11 @@ print(config_files)
 default_value = {
         "host":"irc.freenode.net",
         "port": 6697,
-        "nick":"mRobot123",
+        "nick":"deadMan",
+        "pass":"subash",
         "username":"xxxxx123",
         "realname":"bot_d_panday",
-        "modes":"2 3",
+        "modes":"10 10",
         "channelname":"##linuxnepal",
         "encoding":"UTF-8",
         "admin":"blacpythoz",
@@ -89,12 +90,14 @@ class Connection():
         self.sock = self.ssl_connection()
 
         self.irc_send("NICK {}".format(self.setting["nick"]))
-        self.irc_send("USER {} {} {} :{}".format(self.setting["username"], 
+        self.irc_send("USER {} {} {} {}".format(self.setting["username"], 
                                                      self.setting["modes"], 
                                                      self.setting["host"], 
                                                      self.setting["realname"]))
+        self.irc_send("PRIVMSG nickserv :identify {} {}".format(self.setting["nick"],self.setting["pass"]))
         self.irc_send("JOIN {}".format(self.setting["channelname"]))
         self.irc_send_priv("blacpythoz HELLO!!".format(self.setting["channelname"]))
+    #    self.irc_send("PRIVMSG chanserv :op ##linuxnepal")
 
 # For testing connections
 if __name__ == "__main__":

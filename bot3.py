@@ -1,11 +1,11 @@
 #! /usr/bin/env python3
 # -*- coding: utf8 -*-
-# To do
-# Factorize code with classes and threds
+# To do # Factorize code with classes and threds
 
 import weather
 import nepali_date
 from connector import Connection
+import time
 
 
 # This is class bot it can to anythings
@@ -14,8 +14,14 @@ class Bot():
     #connection object
     bot = ""
 
+    #User info
+    users={}
+
     #local user to whom bot sents the message
     luser=""
+
+    #xada work kolist
+    words = ["mugi","muj","randi","fuck","chikney","rando","kera","machis","lado","puti","muj"]
 
     # Message when user type !fuck
     fuckMessage = "You ass hole, Mother Fucker"
@@ -61,7 +67,7 @@ class Bot():
                 self.sendMsg(" Currently available commads are !date, !weather [location], !fuck  [Admin Only] : !fuckmsg [MSG] !botnick [NAME]  kill bot")
 
             # Exit the bots
-            elif user == self.bot.getadmin() and message == "kill bot":
+            elif self.luser == self.bot.getadmin() and message == "kill bot":
                 self.bot.irc_send("QUIT")
 
             else:
@@ -74,13 +80,29 @@ class Bot():
             self.bot.irc_send("PONG :{}".format(ping_value))
 
         if msg.find("PRIVMSG {}".format(self.bot.getchannel())) != -1:
-            user = self.getusername(msg)
+            self.luser = msg.split('!')[0][1:]
             message = msg.split('PRIVMSG',1)[1].split(':',1)[1]
             self.bot_reply(message)
 
-    # This functions returns the username 
-    def getusername(self,msg):
-        self.luser = msg.split('!')[0][1:]
+        self.testKick(msg)
+
+    # Kick user if the speak rude words
+    # Function determines whether to kick the guy or not
+    def testKick(self,msg):
+        if any(word in msg for word in self.words):
+            if self.luser in self.users:
+                self.users[self.luser] += 1
+                if self.users[self.luser] == 4:
+                    self.bot.irc_send("PRIVMSG chanserv :op ##linuxnepal")
+                    time.sleep(2)
+                    self.bot.irc_send("KICK {} {}".format(self.bot.getchannel(),self.luser))
+                    time.sleep(1)
+                    self.bot.irc_send("PRIVMSG chanserv :deop ##linuxnepal")
+                if self.users[self.luser] == 0:
+                    return
+                self.sendMsg("You have {} chances".format(4 - self.users[self.luser]))
+            else:
+                self.users[self.luser] = 0
 
     # THis functions sent the message to user directly
     def sendMsg(self,msg):
