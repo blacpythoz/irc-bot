@@ -1,11 +1,12 @@
 #! /usr/bin/env python3
-# -*- coding: utf8 -*-
-# To do # Factorize code with classes and threds
+# To do # Implement Multi-Threading and caches
 
 import weather
 import nepali_date
 from connector import Connection
+from random import randint
 import time
+import jokes
 
 # This is class bot it can to anythings
 class Bot():
@@ -20,7 +21,7 @@ class Bot():
     luser=""
 
     #xada work kolist
-    words = ["mugi","muj","randi","fuck","chikney","rando","kera","machis","lado","puti","muj"]
+    words = ["mugi","muj","randi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chikkey']
 
     # Message when user type !fuck
     fuckMessage = "You ass hole, Mother Fucker"
@@ -47,6 +48,12 @@ class Bot():
                 else:
                     self.sendMsg("Enter the city as  !weather Kathmandu")
 
+            elif msg[0] == "!jokes":
+                joke = jokes.get_jokes()
+                rand = randint(0,10)
+                print(rand)
+                self.sendMsg(joke[rand])
+
             # Change bot name through admin
             elif self.luser == self.bot.getadmin() and msg[0] == "!botnick":
                 if len(msg) == 2:
@@ -63,7 +70,7 @@ class Bot():
 
             # Provides help to the user
             elif msg[0] == "!help":
-                self.sendMsg(" Currently available commads are !date, !weather [location], !fuck  [Admin Only] : !fuckmsg [MSG] !botnick [NAME]  kill bot")
+                self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
 
             # Exit the bots
             elif self.luser == self.bot.getadmin() and message == "kill bot":
@@ -71,6 +78,8 @@ class Bot():
 
             else:
                 self.sendMsg("Unknown command: Type !help for more info")
+        else:
+            self.testKick(msg)
 
     def analyzeText(self,msg):
         # Respond ping message
@@ -82,8 +91,6 @@ class Bot():
             self.luser = msg.split('!')[0][1:]
             message = msg.split('PRIVMSG',1)[1].split(':',1)[1]
             self.bot_reply(message)
-
-        self.testKick(msg)
 
     # Kick user if the speak rude words
     # Function determines whether to kick the guy or not

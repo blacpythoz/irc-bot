@@ -1,5 +1,10 @@
+#! /usr/bin/env python3
 import bs4
 import requests
+
+#
+#All the information are taken from nepalipatro.com.np
+#
 
 def get_nepali_date():
     res = requests.get("http://nepalipatro.com.np/language/switch/to/1?redirect=/")
