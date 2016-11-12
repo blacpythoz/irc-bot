@@ -23,6 +23,9 @@ class Bot():
     #xada work kolist
     words = ["mugi","muj","randi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chikkey']
 
+    # No of chance to give if words is spoken
+    chance = 4
+
     # Message when user type !fuck
     fuckMessage = "You ass hole, Mother Fucker"
 
@@ -50,7 +53,7 @@ class Bot():
 
             elif msg[0] == "!jokes":
                 joke = jokes.get_jokes()
-                rand = randint(0,10)
+                rand = randint(0,8)
                 print(rand)
                 self.sendMsg(joke[rand])
 
@@ -63,8 +66,9 @@ class Bot():
 
             # Change fuck message
             elif self.luser == self.bot.getadmin() and msg[0] == "!fuckmsg":
-                if len(msg) == 2:
-                    self.fuckMessage = msg[1]
+                if len(msg) >= 2:
+                    message = ' '.join(msg[1:])
+                    self.fuckMessage = message 
                 else:
                     self.sendMsg("Enter the message as !fuckmsg [MESSAGE]")
 
@@ -75,7 +79,6 @@ class Bot():
             # Exit the bots
             elif self.luser == self.bot.getadmin() and message == "kill bot":
                 self.bot.irc_send("QUIT")
-
             else:
                 self.sendMsg("Unknown command: Type !help for more info")
         else:
@@ -98,14 +101,14 @@ class Bot():
         if any(word in msg for word in self.words):
             if self.luser in self.users:
                 self.users[self.luser] += 1
-                if self.users[self.luser] == 4:
+                if self.users[self.luser] == self.chance:
                     self.bot.irc_send("PRIVMSG chanserv :op ##linuxnepal")
                     time.sleep(2)
                     self.bot.irc_send("KICK {} {}".format(self.bot.getchannel(),self.luser))
                     time.sleep(1)
                     self.bot.irc_send("PRIVMSG chanserv :deop ##linuxnepal")
                     return
-                self.sendMsg("You have {} chances".format(4 - self.users[self.luser]))
+                self.sendMsg("You have {} chances".format(self.chance - self.users[self.luser]))
             else:
                 self.users[self.luser] = 0
 
@@ -124,4 +127,3 @@ class Bot():
 if __name__ == "__main__":
     bot = Bot()
     bot.run()
-

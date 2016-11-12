@@ -17,4 +17,4 @@ def get_jokes():
 
     return datas
 
-#get_jokes()
+get_jokes()
