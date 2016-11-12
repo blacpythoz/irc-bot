@@ -7,7 +7,6 @@ import nepali_date
 from connector import Connection
 import time
 
-
 # This is class bot it can to anythings
 class Bot():
     
@@ -98,7 +97,6 @@ class Bot():
                     self.bot.irc_send("KICK {} {}".format(self.bot.getchannel(),self.luser))
                     time.sleep(1)
                     self.bot.irc_send("PRIVMSG chanserv :deop ##linuxnepal")
-                if self.users[self.luser] == 0:
                     return
                 self.sendMsg("You have {} chances".format(4 - self.users[self.luser]))
             else:

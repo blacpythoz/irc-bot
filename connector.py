@@ -12,14 +12,14 @@ encoding = locale.getpreferredencoding()
 
 myfile='bot.config'
 #config_files =os.path.join(os.getcwd(),myfile) 
-config_files ='/home/deadsec/code/irc/'+myfile
-print(config_files)
+#config_files ='/home/deadsec/code/irc/'+myfile
+#print(config_files)
 
 # Values
 default_value = {
         "host":"irc.freenode.net",
         "port": 6697,
-        "nick":"deadMan",
+        "nick":"deadManish",
         "pass":"subash",
         "username":"xxxxx123",
         "realname":"bot_d_panday",
@@ -30,8 +30,8 @@ default_value = {
 }
 
 def create_config_file():
-    if os.path.isfile(config_files) == False:
-        with open(config_files,'w') as f:
+    if os.path.exists(myfile) == False:
+        with open(myfile,'w') as f:
             json.dump(default_value,f,sort_keys=True,indent=4)
             print("Config files created")
     else:
@@ -43,8 +43,8 @@ class Connection():
     sock = ""
 
     def load_prefers(self):
-        if os.path.isfile(config_files):
-            with open(config_files) as f:
+        if os.path.isfile(myfile):
+            with open(myfile) as f:
                 self.setting = json.load(f)
         else:
             self.setting = default_value
@@ -86,6 +86,7 @@ class Connection():
         return self.setting["nick"]
 
     def main(self):
+        create_config_file()
         self.load_prefers()
         self.sock = self.ssl_connection()
 
