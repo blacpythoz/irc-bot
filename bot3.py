@@ -7,6 +7,7 @@ from connector import Connection
 from random import randint
 import time
 import jokes
+import emailsender
 
 # This is class bot it can to anythings
 class Bot():
@@ -50,6 +51,17 @@ class Bot():
                     self.sendMsg(condition)
                 else:
                     self.sendMsg("Enter the city as  !weather Kathmandu")
+
+            elif msg[0] == "!email":
+                if len(msg) == 3:
+                    message = ' '.join(msg[2:])
+                    data = emailsender.sentEmail(msg[1],message)
+                    if data == 1:
+                        self.sendMsg("Sent Successfully")
+                    else:
+                        self.sendMsg("Error in sending")
+                else:
+                    self.sendMsg("Enter message as !email [emai-address] [message]")
 
             elif msg[0] == "!jokes":
                 joke = jokes.get_jokes()
