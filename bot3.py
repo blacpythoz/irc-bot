@@ -22,7 +22,7 @@ class Bot():
     luser=""
 
     #xada work kolist
-    words = ["mugi","muj","randi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chik',"machi","lundo","ass","asshole","bitch","bhalu","myachis","myach"]
+    words = ["mugi","muj","rand","radi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chik',"machi","lundo","ass","asshole","bitch","bhalu","myachis","myach"]
 
     # No of chance to give if words is spoken
     chance = 4
@@ -114,11 +114,11 @@ class Bot():
             if self.luser in self.users:
                 self.users[self.luser] += 1
                 if self.users[self.luser] == self.chance:
-                    self.bot.irc_send("PRIVMSG chanserv :op ##linuxnepal")
+                    self.bot.irc_send("PRIVMSG chanserv :op {}".format(self.bot.getchannel()))
                     time.sleep(2)
                     self.bot.irc_send("KICK {} {}".format(self.bot.getchannel(),self.luser))
                     time.sleep(1)
-                    self.bot.irc_send("PRIVMSG chanserv :deop ##linuxnepal")
+                    self.bot.irc_send("PRIVMSG chanserv :deop {}".format(self.bot.getchannel()))
                     return
                 self.sendMsg("You have {} chances".format(self.chance - self.users[self.luser]))
             else:
