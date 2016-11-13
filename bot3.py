@@ -53,7 +53,7 @@ class Bot():
                     self.sendMsg("Enter the city as  !weather Kathmandu")
 
             elif msg[0] == "!email":
-                if len(msg) == 3:
+                if len(msg) >= 3:
                     message = ' '.join(msg[2:])
                     data = emailsender.sentEmail(msg[1],message)
                     if data == 1:
@@ -86,7 +86,7 @@ class Bot():
 
             # Provides help to the user
             elif msg[0] == "!help":
-                self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes !email [address] [message]  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
+                self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes, !email [address] [message]  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
 
             # Exit the bots
             elif self.luser == self.bot.getadmin() and message == "kill bot":
