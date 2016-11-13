@@ -64,9 +64,12 @@ class Bot():
                     self.sendMsg("Enter message as !email [emai-address] [message]")
 
             elif msg[0] == "!jokes":
-                joke = jokes.get_jokes()
                 rand = randint(0,8)
-                print(rand)
+                if len(msg) == 2:
+                    joke = jokes.get_jokes(msg[1])
+                else:
+                    joke = jokes.get_jokes()
+                print(joke[rand])
                 self.sendMsg(joke[rand])
 
             # Change bot name through admin
@@ -86,7 +89,7 @@ class Bot():
 
             # Provides help to the user
             elif msg[0] == "!help":
-                self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes, !email [address] [message]  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
+                self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes /tag/, !email [address] [message]  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
 
             # Exit the bots
             elif self.luser == self.bot.getadmin() and message == "kill bot":
