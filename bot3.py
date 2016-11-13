@@ -21,7 +21,7 @@ class Bot():
     luser=""
 
     #xada work kolist
-    words = ["mugi","muj","randi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chikkey']
+    words = ["mugi","muj","randi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chik',"machi","lundo","ass","asshole","bitch","bhalu","myachis","myach"]
 
     # No of chance to give if words is spoken
     chance = 4
@@ -74,7 +74,7 @@ class Bot():
 
             # Provides help to the user
             elif msg[0] == "!help":
-                self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
+                self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes !email [address] [message]  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
 
             # Exit the bots
             elif self.luser == self.bot.getadmin() and message == "kill bot":
