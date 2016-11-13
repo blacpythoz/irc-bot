@@ -64,13 +64,13 @@ class Bot():
                     self.sendMsg("Enter message as !email [emai-address] [message]")
 
             elif msg[0] == "!jokes":
-                rand = randint(0,8)
+                random = randint(0,8)
                 if len(msg) == 2:
-                    joke = jokes.get_jokes(msg[1])
+                    joke = jokes.get_jokes(msg[1],random+1)
                 else:
-                    joke = jokes.get_jokes()
-                print(joke[rand])
-                self.sendMsg(joke[rand])
+                    joke = jokes.get_jokes(rand=random+1)
+                print(joke[random])
+                self.sendMsg(joke[random])
 
             # Change bot name through admin
             elif self.luser == self.bot.getadmin() and msg[0] == "!botnick":

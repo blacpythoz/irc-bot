@@ -16,13 +16,9 @@ def get_jokes(title="dirty",rand=2):
     res = requests.get("http://onelinefun.com/{}/{}/".format(title,rand))
     soup = bs4.BeautifulSoup(res.text,"html.parser")
     data = soup.findAll("p")
-
     datas = []
-
     for dat in data[1:10]:
         datas.append(dat.text)
-        print(dat.text)
-
     return datas
 
-#get_jokes()
+get_jokes(rand=3)
