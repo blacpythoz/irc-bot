@@ -22,7 +22,7 @@ class Bot():
     luser=""
 
     #xada work kolist
-    words = ["mugi","muj","rand","radi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chik',"machi","lundo","ass","asshole","bitch","bhalu","myachis","myach"]
+    words = ["mugi","mug","muji","rand","radi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chik',"machi","lundo","ass","asshole","bitch","bhalu","myachis","myach"]
 
     # No of chance to give if words is spoken
     chance = 4
@@ -65,6 +65,7 @@ class Bot():
 
             elif msg[0] == "!jokes":
                 random = randint(0,8)
+                print(random)
                 if len(msg) == 2:
                     joke = jokes.get_jokes(msg[1],random+1)
                 else:
@@ -90,14 +91,14 @@ class Bot():
             # Provides help to the user
             elif msg[0] == "!help":
                 self.sendMsg(" Currently available commads are !date, !weather location, !fuck, !jokes /tag/, !email [address] [message]  -[Admin Only]- : !fuckmsg [MSG] !botnick [NAME]  kill bot")
-
+                self.bot.irc_send("NAMES {}".format(self.bot.getchannel()))
             # Exit the bots
             elif self.luser == self.bot.getadmin() and message == "kill bot":
                 self.bot.irc_send("QUIT")
             else:
                 self.sendMsg("Unknown command: Type !help for more info")
         else:
-            self.testKick(msg)
+            self.testKick(message)
 
     def analyzeText(self,msg):
         # Respond ping message
@@ -122,12 +123,13 @@ class Bot():
                     self.bot.irc_send("KICK {} {}".format(self.bot.getchannel(),self.luser))
                     time.sleep(1)
                     self.bot.irc_send("PRIVMSG chanserv :deop {}".format(self.bot.getchannel()))
+                    self.users.pop(self.luser)
                     return
                 self.sendMsg("You have {} chances".format(self.chance - self.users[self.luser]))
             else:
                 self.users[self.luser] = 0
 
-    # THis functions sent the message to user directly
+    # This functions sent the message to user directly
     def sendMsg(self,msg):
         self.bot.irc_send_priv("{} {}".format(self.luser,msg))
 
