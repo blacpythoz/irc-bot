@@ -1,5 +1,16 @@
 import weechat
 import subprocess
+
+# How to install
+# Copy this file in .weechat/python by:
+# cp weechat_plugin .weechat/python/
+# if there is no .weechat/python create one:
+# mkdir -p .weechat/python/autoload
+# Then go to .weechat/python/autoload/
+# cd .weechat/python/autoload/
+# Then symbolic to weechat_plugin.py by executing following code:
+# ln -s ../weechat_plugin.py
+
 ## Testing the functions
 weechat.prnt("",",  from python script!")
 
