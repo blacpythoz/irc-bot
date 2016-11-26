@@ -3,7 +3,7 @@
 
 import threading
 import time
-from plugins import weather,nepali_date,jokes,emailsender
+from plugins import weather,nepali_date,jokes,emailsender,horoscope
 from connector import Connection
 from random import randint
 
@@ -56,6 +56,7 @@ class Bot():
         print(random)
         if len(msg) == 2:
             joke = jokes.get_jokes(msg[1],random+1)
+            self.sendMsg(joke[random])
         else:
             joke = jokes.get_jokes(rand=random+1)
             print(joke[random])
@@ -141,20 +142,21 @@ class Bot():
     # Kick user if the speak rude words
     # Function determines whether to kick the guy or not
     def testKick(self,msg):
+        tempUser = self.luser
         if any(word in msg.lower() for word in self.words):
-            if self.luser in self.users:
-                self.users[self.luser] += 1
-                if self.users[self.luser] == self.chance:
+            if tempUser in self.users:
+                self.users[tempUser] += 1
+                if self.users[tempUser] == self.chance:
                     self.bot.irc_send("PRIVMSG chanserv :op {}".format(self.bot.getchannel()))
                     time.sleep(2)
-                    self.bot.irc_send("KICK {} {}".format(self.bot.getchannel(),self.luser))
+                    self.bot.irc_send("KICK {} {}".format(self.bot.getchannel(),tempUser))
                     time.sleep(1)
                     self.bot.irc_send("PRIVMSG chanserv :deop {}".format(self.bot.getchannel()))
-                    self.users.pop(self.luser)
+                    self.users.pop(tempUser)
                     return
-                self.sendMsg("You have {} chances".format(self.chance - self.users[self.luser])) 
+                self.sendMsg("You have {} chances".format(self.chance - self.users[tempUser])) 
             else:
-                self.users[self.luser] = 0
+                self.users[tempUser] = 0
 
     # This functions sent the message to user directly
     def sendMsg(self,msg):
