@@ -1,8 +1,8 @@
 import smtplib
 
 def sentEmail(address,message):
-    sender = '#####@gmail.com'
-    sender_pass='#######'
+    sender = 'ircemailclient@gmail.com'
+    sender_pass='subasharyal'
     receivers = address
 
     try:
@@ -10,8 +10,10 @@ def sentEmail(address,message):
         server.starttls()
         server.login(sender,sender_pass)
         server.sendmail(sender,receivers,message)
+        print("Send")
         return 1
     except :
+        print("not send")
         return 0
 
 #sentEmail('blacpythoz@gmail.com','Hello Mother Fucker')

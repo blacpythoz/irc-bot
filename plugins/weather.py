@@ -20,4 +20,3 @@ def get_weather(location):
         #print(keys," -> ", parsed_json[keys])
 
 #get_weather("Chitwan")
-

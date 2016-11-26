@@ -14,7 +14,7 @@ import subprocess
 ## Testing the functions
 weechat.prnt("",",  from python script!")
 
-SCRIPT_NAME = "Testing"
+SCRIPT_NAME = "Do anything"
 SCRIPT_AUTHOR = "Subash"
 SCRIPT_VERSION = "0.1"
 SCRIPT_LICENSE = "Free"

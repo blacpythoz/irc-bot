@@ -8,4 +8,4 @@ def get_rashi():
     res = urlopen("http://www.astrology.com/us/offsite/rss/daily-extended.aspx")
     raw=res.read()
 
-get_rashi()
+#get_rashi()

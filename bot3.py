@@ -2,13 +2,10 @@
 # To do # Implement Multi-Threading and caches
 
 import threading
-import weather
-import nepali_date
+import time
+from plugins import weather,nepali_date,jokes,emailsender
 from connector import Connection
 from random import randint
-import time
-import jokes
-import emailsender
 
 # This is class bot it can to anythings
 class Bot():
@@ -23,7 +20,7 @@ class Bot():
     luser=""
 
     #xada work kolist
-    words = ["mugi","mug","muji","randy","randi","radi","fuck","chikney","rando","kera","machis","lado","puti","muj",'chik',"machi","lundo","asshole","bitch","bhalu","myachis","myach"]
+    words = ["mugi","mug","muji","randy","randi","radi ","fuck","chikney","rando","kera ","machis","lado","puti","muj ",'chik ',"lundo","asshole","bitch","bhalu","myachis","myach"]
 
     # No of chance to give if words is spoken
     chance = 4

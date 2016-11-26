@@ -7,9 +7,9 @@ import requests
 #All the information are taken from onlinefun.com
 #
 
-tag = ['age','attitude','communication','fat','food','god','health','drug','health','flirty','sex','stupid','dirty']
+tag = ['age','attitude','communication','fat','food','god','health','flirty','sex','stupid','dirty']
 
-def get_jokes(title="dirty",rand=2):
+def get_jokes(title="sex",rand=2):
     # Check if unknow value is entered
     if title not in tag:
         title = "dirty"
@@ -19,6 +19,7 @@ def get_jokes(title="dirty",rand=2):
     datas = []
     for dat in data[1:10]:
         datas.append(dat.text)
+#        print(dat.text)
     return datas
 
-get_jokes(rand=3)
+#get_jokes(rand=3)
